@@ -1,8 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 'use strict'
 
 =======
 >>>>>>> adding signin via google mail
+=======
+'use strict'
+
+>>>>>>> update writing style
 module.exports = () => {
   const length = 8
   const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
