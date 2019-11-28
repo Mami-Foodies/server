@@ -54,7 +54,7 @@ class userController {
       .then(userData => {
         let token = generateToken({ id: userData.id })
         let user = {
-          username: userData.given_name,
+          username: userData.username,
           email: userData.email,
           currency: userData.currency
         }
