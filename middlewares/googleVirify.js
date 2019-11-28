@@ -1,9 +1,9 @@
 'use strict'
 
 const { OAuth2Client } = require('google-auth-library')
-const client = OAuth2Client(process.env.CLIENT_ID)
+const client = new OAuth2Client(process.env.CLIENT_ID)
 
-module.exports = (req, res, next) => {
+function googleVerify(req, res, next) {
   let token = req.body.idToken
   client.verifyIdToken({
     idToken: token,
@@ -16,3 +16,5 @@ module.exports = (req, res, next) => {
     })
     .catch(next)
 }
+
+module.exports = googleVerify

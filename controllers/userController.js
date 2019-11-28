@@ -29,6 +29,7 @@ class userController {
   }
 
   static signInGoogle(req, res, next) {
+    console.log(req.decoded)
     User.findOne({
       email: req.decoded.email
     })
@@ -54,7 +55,7 @@ class userController {
       .then(userData => {
         let token = generateToken({ id: userData.id })
         let user = {
-          username: userData.username,
+          username: userData.given_name,
           email: userData.email,
           currency: userData.currency
         }
