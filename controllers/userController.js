@@ -7,7 +7,6 @@ const generatePassword = require('../helpers/randomPassword')
 
 class userController {
   static signIn(req, res, next) {
-    console.log(req.body)
     let value = { email: req.body.email }
     User
       .findOne(value)
