@@ -4,18 +4,18 @@ const { verifyToken } = require('../helpers/jwt')
 const User = require('../models/user')
 
 function authentication(req, res, next) {
-  let token = req.headers.token 	// simpan header token di variable token
+  let token = req.headers.token
   try {
-    const decoded = verifyToken(token) 	// verify token
+    const decoded = verifyToken(token)
     User
-      .findById({ _id: decoded.id }) 	// cari apakah ada
+      .findById({ _id: decoded.id })
       .then(user => {
         if (user) {
           req.decoded = user
           next()
         }
       })
-      .catch(err => { next(err) })
+      .catch(next)
   } catch (err) {
     next(err)
   }
