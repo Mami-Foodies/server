@@ -11,17 +11,25 @@ class userController {
     User
       .findOne(value)
       .then(userData => {
-        if (comparePassword(req.body.password, userData.password)) {
-          let token = generateToken({ id: userData.id })
-          let user = {
-            username: userData.username,
-            email: userData.email,
-            currency: userData.currency
+        if(userData){
+          let valid = comparePassword(req.body.password, userData.password)
+          if(valid){
+            let token = generateToken({ id: userData.id })
+            let user = {
+              username: userData.username,
+              email: userData.email,
+              currency: userData.currency
+            }
+            let data = { user, token }
+            res.status(200).json(data)
+          }else{
+            throw ({ status: 404, message: 'Password / Username is wrong' })
           }
-          let data = { user, token }
-          res.status(200).json(data)
-        } else {
-          throw ({ status: 404, message: 'Password / Username is wrong' })
+        }else{
+          throw ({
+            status: 400,
+            message: 'Your email is not registered'
+          })
         }
       })
       .catch(next)
