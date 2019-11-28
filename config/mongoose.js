@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const mongoUri = process.env.MONGO_URI
 
+console.log(mongoUri);
 
 mongoose.connect(mongoUri,{
     useFindAndModify: false,
