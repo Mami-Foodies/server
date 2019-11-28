@@ -1,3 +1,5 @@
+'use strict'
+
 const { OAuth2Client } = require('google-auth-library')
 const client = OAuth2Client(process.env.CLIENT_ID)
 
