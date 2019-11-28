@@ -21,7 +21,4 @@ function authentication(req, res, next) {
   }
 }
 
-function authorization(req, res, next) {
-}
-
-module.exports = { authentication, authorization }
+module.exports = { authentication }

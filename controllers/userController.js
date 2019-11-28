@@ -40,7 +40,13 @@ class userController {
         password,
         currency: 'IDR'
       })
-      .then(user => {
+      .then(userData => {
+        let user = {
+          id: userData.id,
+          username: userData.username,
+          email: userData.email,
+          currency: userData.currency
+        }
         res.status(200).json(user)
       })
       .catch(next)
