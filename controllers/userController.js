@@ -3,6 +3,7 @@
 const User = require('../models/user')
 const { comparePassword } = require('../helpers/bcrypt')
 const { generateToken } = require('../helpers/jwt')
+const generatePassword = require('../helpers/randomPassword')
 
 class userController {
   static signIn(req, res, next) {
@@ -28,7 +29,39 @@ class userController {
   }
 
   static signInGoogle(req, res, next) {
-
+    User.findOne({
+      email: req.decoded.email
+    })
+      .then(userData => {
+        if (userData) {
+          let token = generateToken({ id: userData.id })
+          let user = {
+            username: userData.username,
+            email: userData.email,
+            currency: userData.currency
+          }
+          let data = { user, token }
+          res.status(200).json(data)
+        } else {
+          return User.create({
+            username: req.decoded.username,
+            email: req.decoded.email,
+            currency: 'IDR',
+            password: generatePassword()
+          })
+        }
+      })
+      .then(userData => {
+        let token = generateToken({ id: userData.id })
+        let user = {
+          username: userData.username,
+          email: userData.email,
+          currency: userData.currency
+        }
+        let data = { user, token }
+        res.status(200).json(data)
+      })
+      .catch(next)
   }
 
   static register(req, res, next) {
