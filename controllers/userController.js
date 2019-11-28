@@ -29,7 +29,6 @@ class userController {
   }
 
   static signInGoogle(req, res, next) {
-    console.log(req.decoded)
     User.findOne({
       email: req.decoded.email
     })
