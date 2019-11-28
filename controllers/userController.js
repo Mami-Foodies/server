@@ -45,7 +45,7 @@ class userController {
           res.status(200).json(data)
         } else {
           return User.create({
-            username: req.decoded.username,
+            username: req.decoded.given_name,
             email: req.decoded.email,
             currency: 'IDR',
             password: generatePassword()
@@ -55,7 +55,7 @@ class userController {
       .then(userData => {
         let token = generateToken({ id: userData.id })
         let user = {
-          username: userData.given_name,
+          username: userData.username,
           email: userData.email,
           currency: userData.currency
         }
