@@ -26,7 +26,7 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: [true, `email field required to be filled`]
+    required: [true, `password field required to be filled`]
   },
   currency: {
     type: String
