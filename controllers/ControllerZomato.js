@@ -169,11 +169,10 @@ class ControllerZomato {
     }
 
     static search(req, res, next) {
-        console.log(req.body)
-        console.log('masuk sini ya')
-        let keyword = req.body.place
+        let {place} = req.body
+        let keyword = place.split(' ').join('')
         axios({
-            url: 'https://developers.zomato.com/api/v2.1/search?count=8&q=' + keyword,
+            url: `https://developers.zomato.com/api/v2.1/search?count=8&q=${keyword}`,
             method: 'GET',
             headers:{
                 user_key: ZOMATO_API_KEY
