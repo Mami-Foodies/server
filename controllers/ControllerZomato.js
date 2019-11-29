@@ -78,14 +78,14 @@ class ControllerZomato {
     }
 
     static geocode(req, res, next) {
-        axios.get(
-            `https://developers.zomato.com/api/v2.1/geocode?lat=${req.params.lat}&lon=${req.params.lon}`,
-            {
-                headers: {
-                    'user_key': ZOMATO_API_KEY
-                }
+        axios({
+            url: `https://developers.zomato.com/api/v2.1/geocode?lat=${req.params.lat}&lon=${req.params.lon}`,
+            method: 'GET',
+            headers:{
+                user_key: ZOMATO_API_KEY
             }
-        ).then(response => {
+        })
+        .then(response => {
             res.status(201).json(response.data);
         }).catch(err => {
             next(err)
@@ -172,14 +172,21 @@ class ControllerZomato {
         let {place} = req.body
         let keyword = place.split(' ').join('')
         axios({
-            url: `https://developers.zomato.com/api/v2.1/search?count=8&q=${keyword}`,
+            url: `https://developers.zomato.com/api/v2.1/search?q=${keyword}`,
             method: 'GET',
             headers:{
                 user_key: ZOMATO_API_KEY
             }
         })
-        .then(response => {
-            res.status(201).json(response.data);
+        .then(({data}) => {
+            let restaurants = data.restaurants
+            let resto = []
+            restaurants.forEach(data => {
+                if(data.restaurant.thumb !== ''){
+                    resto.push(data.restaurant)
+                }
+            });
+            res.status(201).json(resto);
         }).catch(err => {
             next(err)
         })
