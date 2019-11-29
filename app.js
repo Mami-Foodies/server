@@ -1,7 +1,7 @@
-if(process.env.NODE_ENV === 'development'){
-    require('dotenv').config()
-}
-
+// if(process.env.NODE_ENV === 'development'){
+//     require('dotenv').config()
+// }
+require('dotenv').config()
 // require database
 require('./config/mongoose')
 
@@ -26,5 +26,6 @@ app.use(routes)
 
 // errorhandler
 app.use(errorHandler)
+
 
 module.exports = app
