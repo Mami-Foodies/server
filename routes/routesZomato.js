@@ -25,7 +25,7 @@ router.get("/restaurant/:res_id", ControllerZomato.restaturant);
 //reviews
 router.get("/reviews/:res_id", ControllerZomato.reviews);
 //search
-router.get("/search/:keyword", ControllerZomato.search);
+router.get("/search", ControllerZomato.search);
 
 
 
