@@ -23,12 +23,15 @@ class GmapController
 
       static getPlaceIdByLongLat(req,res)
       {
+        console.log('req query',req.query)  
+        console.log('latitude', req.query.latitude)
+        console.log('longitude', req.query.longitude)
         axios({
             method:'get',
-            url:`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=%22%22%20jakarta&&inputtype=textquery&locationbias=point:-6.260721,106.781634&key=${process.env.GMAP_API_KEY}`
+            url:`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${req.query.restname}&inputtype=textquery&locationbias=point:${req.query.latitude},${req.query.longitude}&key=${process.env.GMAP_API_KEY}`
         })
         .then(result=>{
-            console.log(result.data)
+            res.status(200).json(result.data.candidates[0].place_id)
         })
         .catch(err=>{
             console.log(err)

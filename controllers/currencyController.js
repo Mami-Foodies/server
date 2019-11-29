@@ -15,7 +15,7 @@ class CurrencyController
             const allRate = result.data.rates
             // console.log("TCL: allRate", allRate)
             let resData
-            if(req.query)
+            if(req.query.convertFrom)
               {  
                 resData = Number((req.query.price * ((1/allRate[req.query.convertFrom]) / (1/allRate[req.query.convertInto]) ) ).toFixed(2) )
               }

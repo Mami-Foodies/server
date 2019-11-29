@@ -4,7 +4,7 @@ const gmapController = require('../controllers/gmapController')
 
 
 router.get('/getplaceidbyplacename', gmapController.getPlaceIdByPlaceName)
-router.get('/getplaceidbylonglat', gmapController.getPlaceIdByLongLat)
+router.get('/getplaceidbylonglat/?', gmapController.getPlaceIdByLongLat)
 
 
 module.exports = router
