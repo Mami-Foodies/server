@@ -59,14 +59,16 @@ class userController {
         }
       })
       .then(userData => {
-        let token = generateToken({ id: userData.id })
-        let user = {
-          username: userData.username,
-          email: userData.email,
-          currency: userData.currency
+        if(userData){
+          let token = generateToken({ id: userData.id })
+          let user = {
+            username: userData.username,
+            email: userData.email,
+            currency: userData.currency
+          }
+          let data = { user, token }
+          res.status(200).json(data)
         }
-        let data = { user, token }
-        res.status(200).json(data)
       })
       .catch(next)
   }
